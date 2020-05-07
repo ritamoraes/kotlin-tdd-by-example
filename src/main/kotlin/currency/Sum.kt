@@ -5,5 +5,5 @@ class Sum(
     val addend: Money
 ) : Expression {
 
-    override fun reduce(to: String) = Money(amount = augend.amount + addend.amount, currency = to)
+    override fun reduce(bank: Bank, to: String) = Money(amount = augend.amount + addend.amount, currency = to)
 }

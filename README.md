@@ -10,11 +10,11 @@ TODO List
 ---
 **Monney Example**
 - [ ] $5 + 10 CHF = $10 if rate is 2:1
-- [ ] **$5 + $5 = $10**
+- [x] $5 + $5 = $10
 - [ ] Retorna uma classe Money a partir da expressão $5 + $5 
 - [x] Bank.reduce(Money)
-- [ ] Transforma dinheiro incluindo a conversão 
-- [ ] Reduce(Bank, String)
+- [x] Transforma dinheiro incluindo a conversão 
+- [x] Reduce(Bank, String)
 - [x] $5 * 2 = $10
 - [x] Tornar "amount" privado
 - [x] Dollar side-effects~~
@@ -32,4 +32,4 @@ TODO List
 - [ ] Delete testFrancMultiplication?
 
 ---
-##Proximo Capítulo 14
+##Proximo Capítulo 15

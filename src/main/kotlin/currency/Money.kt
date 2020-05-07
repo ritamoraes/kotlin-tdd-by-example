@@ -1,7 +1,10 @@
 package currency
 
 data class Money(val amount: Int, val currency: String) : Expression {
-    override fun reduce(to: String) = this
+    override fun reduce(bank: Bank, to: String): Money {
+        val rate = bank.rate(currency, to) ?: 1
+        return Money(amount = amount / rate, currency = to)
+    }
 
     companion object {
         fun dollar(amount: Int) = Money(amount = amount, currency = "USD")
