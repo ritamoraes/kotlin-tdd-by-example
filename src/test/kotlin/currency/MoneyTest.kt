@@ -68,4 +68,14 @@ class MoneyTest {
     fun `identity rate`() {
         assertEquals(1, Bank().rate("USD", "USD"))
     }
+
+    @Test
+    fun `mixed addition`(){
+        val fiveDollars: Expression = Money.dollar(5)
+        val tenFrancs: Expression = Money.franc(10)
+        val bank = Bank()
+        bank.addRate("CHF","USD", 2)
+        val result = bank.reduce(fiveDollars.plus(tenFrancs), "USD")
+        assertEquals(Money.dollar(10), result)
+    }
 }
