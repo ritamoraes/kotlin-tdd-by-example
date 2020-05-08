@@ -1,7 +1,11 @@
 package currency
 
+import com.natpryce.hamkrest.assertion.assertThat
+import com.natpryce.hamkrest.isA
+import com.natpryce.hamkrest.sameInstance
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
@@ -33,14 +37,6 @@ class MoneyTest {
         val sum = fiveDollars.plus(fiveDollars)
         val reduced = Bank().reduce(sum, "USD")
         assertEquals(Money.dollar(10), reduced)
-    }
-
-    @Test
-    fun `money plus return sum`() {
-        val fiveDollars = Money.dollar(5)
-        val sumExpression = fiveDollars.plus(fiveDollars)
-        assertEquals(fiveDollars, sumExpression.augend)
-        assertEquals(fiveDollars, sumExpression.addend)
     }
 
     @Test
@@ -78,4 +74,33 @@ class MoneyTest {
         val result = bank.reduce(fiveDollars.plus(tenFrancs), "USD")
         assertEquals(Money.dollar(10), result)
     }
+
+    @Test
+    fun `sum plus money`(){
+        val fiveDollars: Expression = Money.dollar(5)
+        val tenFrancs: Expression = Money.franc(10)
+        val bank = Bank()
+        bank.addRate("CHF", "USD", 2)
+        val sum: Expression = Sum(fiveDollars, tenFrancs).plus(fiveDollars)
+        val result = bank.reduce(sum, "USD")
+        assertEquals(Money.dollar(15), result)
+    }
+
+    @Test
+    fun `sum times`(){
+        val fiveDollars: Expression = Money.dollar(5)
+        val tenFrancs: Expression = Money.franc(10)
+        val bank = Bank()
+        bank.addRate("CHF", "USD", 2)
+        val sum = Sum(fiveDollars, tenFrancs).times(2)
+        val result = bank.reduce(sum, "USD")
+        assertEquals(Money.dollar(20), result)
+    }
+
+    @Test
+    fun `plus same currency return money`(){
+        val sum = Money.dollar(1).plus(Money.dollar(1))
+        assertSame(Money, sum)
+    }
+
 }

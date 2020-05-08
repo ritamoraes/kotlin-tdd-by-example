@@ -11,27 +11,22 @@ TODO List
 **Monney Example**
 - [x] $5 + 10 CHF = $10 if rate is 2:1
 - [x] $5 + $5 = $10
-- [ ] Retorna uma classe Money a partir da expressão $5 + $5 
+- [x] **Retorna uma classe Money a partir da expressão $5 + $5** 
 - [x] Bank.reduce(Money)
 - [x] Transforma dinheiro incluindo a conversão 
 - [x] Reduce(Bank, String)
 - [x] $5 * 2 = $10
 - [x] Tornar "amount" privado
 - [x] Dollar side-effects~~
-- [ ] Arredondamento de Money
 - [x] Equals()
-- [ ] hashcode
-- [ ] Equal null
-- [ ] Equal object
 - [x] 5 CHF * 2 = 10 CHF
 - [X] Dollar/Franc Duplication
 - [x] Common Equals()
 - [X] Common Times
 - [x] Compare Francs with Dollars
 - [x] Currency
-- [ ] Delete testFrancMultiplication?
-- [ ] Sum.plus
-- [ ] Expression.times
+- [x] Sum.plus
+- [x] Expression.times
 
 ---
-##Proximo Capítulo 15
+##Proximo Capítulo 16

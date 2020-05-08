@@ -6,7 +6,9 @@ data class Money(val amount: Int, val currency: String) : Expression {
         return Money(amount = amount / rate, currency = to)
     }
 
-    override fun plus(addend: Expression) = Sum(this, addend)
+    override fun plus(addend: Expression): Expression = Sum(this, addend)
+
+    override fun times(multiplier: Int): Expression = this.copy(amount = multiplier * this.amount)
 
     companion object {
         fun dollar(amount: Int) = Money(amount = amount, currency = "USD")
@@ -14,5 +16,4 @@ data class Money(val amount: Int, val currency: String) : Expression {
     }
 }
 
-fun Money.times(multiplier: Int): Expression = this.copy(amount = multiplier * this.amount)
 

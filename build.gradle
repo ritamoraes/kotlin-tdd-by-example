@@ -15,6 +15,7 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "com.natpryce:hamkrest:1.7.0.3"
     testImplementation "org.junit.jupiter:junit-jupiter:5.6.2"
 }
 
