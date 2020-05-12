@@ -8,7 +8,7 @@ TODO List
 
 
 ---
-**Monney Example**
+**Money Example**
 - [x] $5 + 10 CHF = $10 if rate is 2:1
 - [x] $5 + $5 = $10
 - [x] **Retorna uma classe Money a partir da expressão $5 + $5** 
@@ -29,4 +29,11 @@ TODO List
 - [x] Expression.times
 
 ---
-##Proximo Capítulo 16
+##Final do primeiro exemplo
+
+---
+**Refatorar o exemplo Money**
+
+- [ ] Classe banco não precisa ser instanciada
+
+

@@ -1,11 +1,7 @@
 package currency
 
-import com.natpryce.hamkrest.assertion.assertThat
-import com.natpryce.hamkrest.isA
-import com.natpryce.hamkrest.sameInstance
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
@@ -35,72 +31,61 @@ class MoneyTest {
     fun `money simple addition`() {
         val fiveDollars = Money.dollar(5)
         val sum = fiveDollars.plus(fiveDollars)
-        val reduced = Bank().reduce(sum, "USD")
+        val reduced = Bank.reduce(sum, "USD")
         assertEquals(Money.dollar(10), reduced)
     }
 
     @Test
     fun `reduce sum`() {
         val expression = Sum(Money.dollar(3), Money.dollar(4))
-        val result = Bank().reduce(expression, "USD")
+        val result = Bank.reduce(expression, "USD")
         assertEquals(Money.dollar(7), result)
     }
 
     @Test
     fun `reduce money`() {
-        val result = Bank().reduce(Money.dollar(1), "USD")
+        val result = Bank.reduce(Money.dollar(1), "USD")
         assertEquals(Money.dollar(1), result)
     }
 
     @Test
     fun `reduce money with different currency`() {
-        val bank = Bank()
-        bank.addRate("CHF", "USD", 2)
-        val result = bank.reduce(Money.franc(2), "USD")
+        Bank.addRate("CHF", "USD", 2)
+        val result = Bank.reduce(Money.franc(2), "USD")
         assertEquals(Money.dollar(1), result)
     }
 
     @Test
     fun `identity rate`() {
-        assertEquals(1, Bank().rate("USD", "USD"))
+        assertEquals(1, Bank.rate("USD", "USD"))
     }
 
     @Test
-    fun `mixed addition`(){
+    fun `mixed addition`() {
         val fiveDollars: Expression = Money.dollar(5)
         val tenFrancs: Expression = Money.franc(10)
-        val bank = Bank()
-        bank.addRate("CHF","USD", 2)
-        val result = bank.reduce(fiveDollars.plus(tenFrancs), "USD")
+        Bank.addRate("CHF", "USD", 2)
+        val result = Bank.reduce(fiveDollars.plus(tenFrancs), "USD")
         assertEquals(Money.dollar(10), result)
     }
 
     @Test
-    fun `sum plus money`(){
+    fun `sum plus money`() {
         val fiveDollars: Expression = Money.dollar(5)
         val tenFrancs: Expression = Money.franc(10)
-        val bank = Bank()
-        bank.addRate("CHF", "USD", 2)
+        Bank.addRate("CHF", "USD", 2)
         val sum: Expression = Sum(fiveDollars, tenFrancs).plus(fiveDollars)
-        val result = bank.reduce(sum, "USD")
+        val result = Bank.reduce(sum, "USD")
         assertEquals(Money.dollar(15), result)
     }
 
     @Test
-    fun `sum times`(){
+    fun `sum times`() {
         val fiveDollars: Expression = Money.dollar(5)
         val tenFrancs: Expression = Money.franc(10)
-        val bank = Bank()
-        bank.addRate("CHF", "USD", 2)
+        Bank.addRate("CHF", "USD", 2)
         val sum = Sum(fiveDollars, tenFrancs).times(2)
-        val result = bank.reduce(sum, "USD")
+        val result = Bank.reduce(sum, "USD")
         assertEquals(Money.dollar(20), result)
     }
-
-    @Test
-    fun `plus same currency return money`(){
-        val sum = Money.dollar(1).plus(Money.dollar(1))
-        assertSame(Money, sum)
-    }
-
 }
